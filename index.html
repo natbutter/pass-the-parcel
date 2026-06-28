@@ -145,13 +145,19 @@
             margin-top: 4px;
         }
         #ytPlayerContainer {
-            position: fixed;
-            top: -9999px;
-            left: -9999px;
-            width: 1px;
-            height: 1px;
+            width: 280px;
+            height: 158px;
+            margin-top: 16px;
+            border-radius: 12px;
             overflow: hidden;
-            pointer-events: none;
+            opacity: 0.15;
+            transition: opacity 0.3s ease;
+        }
+        #ytPlayerContainer:hover {
+            opacity: 1;
+        }
+        #ytPlayerContainer iframe {
+            border-radius: 12px;
         }
 
         @keyframes blink {
@@ -185,11 +191,9 @@
             <select id="trackSelect" style="width: 100%; border: none; padding: 10px; background: transparent; font-size: 1rem; font-weight: bold; color: #333; outline: none; cursor: pointer; border-radius: 10px;">
                 <option value="youtube" selected>📺 YouTube Video</option>
                 <option value="random">🎲 Randomise Free Track</option>
-                <option value="https://storage.googleapis.com/codesandbox-prod-static/music/game-music-loop.mp3">🕹️ Chiptune Loop</option>
                 <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">🎵 Upbeat Electronic</option>
                 <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3">🚀 Driving Beat</option>
                 <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3">🎸 Rock Energy</option>
-                <option value="https://actions.google.com/sounds/v1/science_fiction/ambient_space_machine.ogg">🛸 Space Ambient</option>
             </select>
         </div>
         <div class="youtube-url-group" id="youtubeUrlGroup">
@@ -201,11 +205,10 @@
 
     <div id="statusLabel" class="status">Ready to Play!</div>
     <button id="actionBtn" onclick="toggleGame()">START MUSIC</button>
+    <div id="ytPlayerContainer" style="display:none;"></div>
 </div>
 
-<!-- Using an open-source, upbeat chiptune track loop -->
 <audio id="bgMusic" loop preload="auto"></audio>
-<div id="ytPlayerContainer"></div>
 
 <script>
     const music = document.getElementById('bgMusic');
@@ -287,27 +290,28 @@
             ytPlayer.destroy();
             ytPlayer = null;
         }
-        // Use youtube-nocookie.com for privacy-enhanced mode (reduces ads)
+        // Show the player container (must be visible for iOS Safari)
+        document.getElementById('ytPlayerContainer').style.display = 'block';
         ytPlayer = new YT.Player('ytPlayerContainer', {
-            height: '1',
-            width: '1',
+            height: '158',
+            width: '280',
             videoId: videoId,
-            host: 'https://www.youtube-nocookie.com',
             playerVars: {
-                autoplay: 1,
+                autoplay: 0,           // Don't autoplay; we call playVideo() on ready
                 start: startTime,
                 loop: 1,
-                playlist: videoId, // Required for loop to work
-                controls: 0,
+                playlist: videoId,     // Required for loop to work
+                playsinline: 1,        // Critical for iOS Safari
+                controls: 1,           // iOS may block without controls
                 disablekb: 1,
                 modestbranding: 1,
                 rel: 0,
-                iv_load_policy: 3, // Hide annotations
+                iv_load_policy: 3,     // Hide annotations
                 fs: 0
             },
             events: {
                 onReady: (event) => {
-                    event.target.setVolume(60);
+                    event.target.setVolume(100);
                     event.target.playVideo();
                 },
                 onError: (event) => {
@@ -390,6 +394,7 @@
             usingYouTube = false;
             // Stop any YouTube that might be playing
             if (ytPlayer) { try { ytPlayer.stopVideo(); } catch(e){} }
+            document.getElementById('ytPlayerContainer').style.display = 'none';
 
             // Track Selection Logic (free tracks)
             const trackOptions = Array.from(trackSelect.options)
