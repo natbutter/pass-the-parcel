@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,19 +17,22 @@
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: #333;
         }
+
         .container {
             text-align: center;
             background: white;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             max-width: 450px;
             width: 90%;
         }
+
         h1 {
             margin-bottom: 10px;
             color: #4a4a4a;
         }
+
         .status {
             font-size: 1.5rem;
             font-weight: bold;
@@ -36,9 +40,16 @@
             height: 40px;
             transition: color 0.3s ease;
         }
-        .playing { color: #2ecc71; }
-        .stopped { color: #e74c3c; animation: blink 1s infinite; }
-        
+
+        .playing {
+            color: #2ecc71;
+        }
+
+        .stopped {
+            color: #e74c3c;
+            animation: blink 1s infinite;
+        }
+
         button {
             background-color: #3498db;
             color: white;
@@ -52,9 +63,20 @@
             transition: transform 0.1s, background-color 0.2s;
             width: 100%;
         }
-        button:hover { background-color: #2980b9; }
-        button:active { transform: scale(0.98); }
-        button:disabled { background-color: #bdc3c7; cursor: not-allowed; box-shadow: none; }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
 
         .settings {
             margin-bottom: 24px;
@@ -62,6 +84,7 @@
             background: #f0f4f8;
             border-radius: 12px;
         }
+
         .settings label {
             display: block;
             font-size: 0.85rem;
@@ -71,12 +94,14 @@
             color: #7f8c8d;
             margin-bottom: 10px;
         }
+
         .time-inputs {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
         }
+
         .input-group {
             display: flex;
             align-items: center;
@@ -86,7 +111,11 @@
             padding: 6px 10px;
             transition: border-color 0.2s;
         }
-        .input-group:focus-within { border-color: #3498db; }
+
+        .input-group:focus-within {
+            border-color: #3498db;
+        }
+
         .input-group input[type="number"] {
             width: 50px;
             border: none;
@@ -98,19 +127,23 @@
             background: transparent;
             -moz-appearance: textfield;
         }
+
         .input-group input[type="number"]::-webkit-inner-spin-button,
         .input-group input[type="number"]::-webkit-outer-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
+
         .input-group input[type="number"]:disabled {
             color: #bdc3c7;
         }
+
         .input-group .unit {
             font-size: 0.85rem;
             color: #95a5a6;
             margin-left: 4px;
         }
+
         .separator {
             font-size: 0.9rem;
             color: #95a5a6;
@@ -120,6 +153,7 @@
         .youtube-url-group {
             margin-top: 12px;
         }
+
         .youtube-url-group input[type="text"] {
             width: 100%;
             border: 2px solid #dce1e8;
@@ -132,18 +166,22 @@
             box-sizing: border-box;
             background: white;
         }
+
         .youtube-url-group input[type="text"]:focus {
             border-color: #e74c3c;
         }
+
         .youtube-url-group input[type="text"]:disabled {
             background: #f0f4f8;
             color: #bdc3c7;
         }
+
         .youtube-url-group .hint {
             font-size: 0.75rem;
             color: #95a5a6;
             margin-top: 4px;
         }
+
         #ytPlayerContainer {
             width: 280px;
             height: 158px;
@@ -153,304 +191,320 @@
             opacity: 0.15;
             transition: opacity 0.3s ease;
         }
+
         #ytPlayerContainer:hover {
             opacity: 1;
         }
+
         #ytPlayerContainer iframe {
             border-radius: 12px;
         }
 
         @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+
+            100% {
+                opacity: 1;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>🎁 Pass the Parcel</h1>
+    <div class="container">
+        <h1>🎁 Pass the Parcel</h1>
 
-    <div class="settings">
-        <label>Random stop between</label>
-        <div class="time-inputs">
-            <div class="input-group">
-                <input type="number" id="minTime" value="10" min="1" max="120" step="1">
-                <span class="unit">sec</span>
+        <div class="settings">
+            <label>Random stop between</label>
+            <div class="time-inputs">
+                <div class="input-group">
+                    <input type="number" id="minTime" value="10" min="1" max="120" step="1">
+                    <span class="unit">sec</span>
+                </div>
+                <span class="separator">and</span>
+                <div class="input-group">
+                    <input type="number" id="maxTime" value="25" min="2" max="180" step="1">
+                    <span class="unit">sec</span>
+                </div>
             </div>
-            <span class="separator">and</span>
-            <div class="input-group">
-                <input type="number" id="maxTime" value="25" min="2" max="180" step="1">
-                <span class="unit">sec</span>
+
+            <label style="margin-top: 20px;">Music Track</label>
+            <div class="input-group" style="padding: 0;">
+                <select id="trackSelect"
+                    style="width: 100%; border: none; padding: 10px; background: transparent; font-size: 1rem; font-weight: bold; color: #333; outline: none; cursor: pointer; border-radius: 10px;">
+                    <option value="youtube">📺 YouTube Video (desktop)</option>
+                    <option value="random" selected>🎲 Randomise Free Track</option>
+                    <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">🎵 Upbeat Electronic
+                    </option>
+                    <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3">🚀 Driving Beat
+                    </option>
+                    <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3">🎸 Rock Energy
+                    </option>
+                </select>
+            </div>
+            <div class="youtube-url-group" id="youtubeUrlGroup">
+                <input type="text" id="youtubeUrl" placeholder="Paste YouTube link here..."
+                    value="https://youtu.be/0Ui-QzihJGo?si=yQNaB881ic6PUUwx&t=6">
+                <div class="hint">Supports youtube.com and youtu.be links</div>
             </div>
         </div>
 
-        <label style="margin-top: 20px;">Music Track</label>
-        <div class="input-group" style="padding: 0;">
-            <select id="trackSelect" style="width: 100%; border: none; padding: 10px; background: transparent; font-size: 1rem; font-weight: bold; color: #333; outline: none; cursor: pointer; border-radius: 10px;">
-                <option value="youtube" selected>📺 YouTube Video</option>
-                <option value="random">🎲 Randomise Free Track</option>
-                <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">🎵 Upbeat Electronic</option>
-                <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3">🚀 Driving Beat</option>
-                <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3">🎸 Rock Energy</option>
-            </select>
-        </div>
-        <div class="youtube-url-group" id="youtubeUrlGroup">
-            <input type="text" id="youtubeUrl" placeholder="Paste YouTube link here..."
-                   value="https://youtu.be/0Ui-QzihJGo?si=yQNaB881ic6PUUwx&t=6">
-            <div class="hint">Supports youtube.com and youtu.be links</div>
-        </div>
+        <div id="statusLabel" class="status">Ready to Play!</div>
+        <button id="actionBtn" onclick="toggleGame()">START MUSIC</button>
+        <div id="ytPlayerContainer" style="display:none;"></div>
     </div>
 
-    <div id="statusLabel" class="status">Ready to Play!</div>
-    <button id="actionBtn" onclick="toggleGame()">START MUSIC</button>
-    <div id="ytPlayerContainer" style="display:none;"></div>
-</div>
+    <audio id="bgMusic" loop preload="auto"></audio>
 
-<audio id="bgMusic" loop preload="auto"></audio>
+    <script>
+        const music = document.getElementById('bgMusic');
+        const statusLabel = document.getElementById('statusLabel');
+        const actionBtn = document.getElementById('actionBtn');
+        const minTimeInput = document.getElementById('minTime');
+        const maxTimeInput = document.getElementById('maxTime');
+        const trackSelect = document.getElementById('trackSelect');
+        const youtubeUrlInput = document.getElementById('youtubeUrl');
+        const youtubeUrlGroup = document.getElementById('youtubeUrlGroup');
+        let stopTimer;
+        let ytPlayer = null;
+        let ytReady = false;
+        let isPlaying = false;
+        let usingYouTube = false;
+        let pendingYtPlay = false; // Queue play if API not ready yet
 
-<script>
-    const music = document.getElementById('bgMusic');
-    const statusLabel = document.getElementById('statusLabel');
-    const actionBtn = document.getElementById('actionBtn');
-    const minTimeInput = document.getElementById('minTime');
-    const maxTimeInput = document.getElementById('maxTime');
-    const trackSelect = document.getElementById('trackSelect');
-    const youtubeUrlInput = document.getElementById('youtubeUrl');
-    const youtubeUrlGroup = document.getElementById('youtubeUrlGroup');
-    let stopTimer;
-    let ytPlayer = null;
-    let ytReady = false;
-    let isPlaying = false;
-    let usingYouTube = false;
-    let pendingYtPlay = false; // Queue play if API not ready yet
-
-    // Show/hide the YouTube URL input based on track selection
-    trackSelect.addEventListener('change', () => {
-        youtubeUrlGroup.style.display = trackSelect.value === 'youtube' ? 'block' : 'none';
-    });
-    // Initial state
-    youtubeUrlGroup.style.display = trackSelect.value === 'youtube' ? 'block' : 'none';
-
-    // ── YouTube IFrame API ──────────────────────────────────
-    // Load the IFrame Player API code asynchronously.
-    const ytScript = document.createElement('script');
-    ytScript.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(ytScript);
-
-    function onYouTubeIframeAPIReady() {
-        ytReady = true;
-        // If a play was requested while API was loading, fire it now
-        if (pendingYtPlay) {
-            pendingYtPlay = false;
-            startRound();
-        }
-    }
-    // Expose globally for the YouTube API callback
-    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-
-    /**
-     * Extract YouTube video ID and optional start time from various URL formats:
-     *   - https://www.youtube.com/watch?v=VIDEO_ID
-     *   - https://youtu.be/VIDEO_ID
-     *   - https://youtube.com/embed/VIDEO_ID
-     *   - Supports &t=6 or ?t=6 start-time parameter
-     */
-    function parseYouTubeUrl(url) {
-        try {
-            const u = new URL(url);
-            let videoId = null;
-            let startTime = 0;
-
-            if (u.hostname === 'youtu.be') {
-                videoId = u.pathname.slice(1).split('/')[0];
-            } else if (u.hostname.includes('youtube.com')) {
-                if (u.pathname.startsWith('/embed/')) {
-                    videoId = u.pathname.split('/embed/')[1];
-                } else {
-                    videoId = u.searchParams.get('v');
-                }
-            }
-
-            // Parse start time (t parameter)
-            const tParam = u.searchParams.get('t');
-            if (tParam) {
-                startTime = parseInt(tParam, 10) || 0;
-            }
-
-            return videoId ? { videoId, startTime } : null;
-        } catch {
-            return null;
-        }
-    }
-
-    function createOrUpdateYtPlayer(videoId, startTime) {
-        if (ytPlayer) {
-            ytPlayer.destroy();
-            ytPlayer = null;
-        }
-        // Show the player container (must be visible for iOS Safari)
-        document.getElementById('ytPlayerContainer').style.display = 'block';
-        ytPlayer = new YT.Player('ytPlayerContainer', {
-            height: '158',
-            width: '280',
-            videoId: videoId,
-            playerVars: {
-                autoplay: 0,           // Don't autoplay; we call playVideo() on ready
-                start: startTime,
-                loop: 1,
-                playlist: videoId,     // Required for loop to work
-                playsinline: 1,        // Critical for iOS Safari
-                controls: 1,           // iOS may block without controls
-                disablekb: 1,
-                modestbranding: 1,
-                rel: 0,
-                iv_load_policy: 3,     // Hide annotations
-                fs: 0
-            },
-            events: {
-                onReady: (event) => {
-                    event.target.setVolume(100);
-                    event.target.playVideo();
-                },
-                onError: (event) => {
-                    console.error('YouTube Player Error:', event.data);
-                    statusLabel.textContent = '⚠️ YouTube error – try another link';
-                    statusLabel.className = 'status stopped';
-                    actionBtn.textContent = 'TRY AGAIN';
-                    actionBtn.style.backgroundColor = '#e67e22';
-                    isPlaying = false;
-                    usingYouTube = false;
-                    setInputsDisabled(false);
-                    clearTimeout(stopTimer);
-                }
-            }
+        // Show/hide the YouTube URL input based on track selection
+        trackSelect.addEventListener('change', () => {
+            youtubeUrlGroup.style.display = trackSelect.value === 'youtube' ? 'block' : 'none';
         });
-    }
+        // Initial state
+        youtubeUrlGroup.style.display = trackSelect.value === 'youtube' ? 'block' : 'none';
 
-    // ── Core game logic ─────────────────────────────────────
-    function setInputsDisabled(disabled) {
-        minTimeInput.disabled = disabled;
-        maxTimeInput.disabled = disabled;
-        trackSelect.disabled = disabled;
-        youtubeUrlInput.disabled = disabled;
-    }
+        // ── YouTube IFrame API ──────────────────────────────────
+        // Load the IFrame Player API code asynchronously.
+        const ytScript = document.createElement('script');
+        ytScript.src = 'https://www.youtube.com/iframe_api';
+        document.head.appendChild(ytScript);
 
-    function getTimeBounds() {
-        let minSec = parseInt(minTimeInput.value, 10) || 10;
-        let maxSec = parseInt(maxTimeInput.value, 10) || 25;
-
-        // Clamp to sensible values
-        minSec = Math.max(1, minSec);
-        maxSec = Math.max(minSec + 1, maxSec);
-
-        // Write clamped values back so the user sees the correction
-        minTimeInput.value = minSec;
-        maxTimeInput.value = maxSec;
-
-        return { minMs: minSec * 1000, maxMs: maxSec * 1000 };
-    }
-
-    function toggleGame() {
-        if (isPlaying) {
-            stopRound();
-        } else {
-            startRound();
+        function onYouTubeIframeAPIReady() {
+            ytReady = true;
+            // If a play was requested while API was loading, fire it now
+            if (pendingYtPlay) {
+                pendingYtPlay = false;
+                startRound();
+            }
         }
-    }
+        // Expose globally for the YouTube API callback
+        window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
 
-    function startRound() {
-        const { minMs, maxMs } = getTimeBounds();
-        const selectedValue = trackSelect.value;
+        /**
+         * Extract YouTube video ID and optional start time from various URL formats:
+         *   - https://www.youtube.com/watch?v=VIDEO_ID
+         *   - https://youtu.be/VIDEO_ID
+         *   - https://youtube.com/embed/VIDEO_ID
+         *   - Supports &t=6 or ?t=6 start-time parameter
+         */
+        function parseYouTubeUrl(url) {
+            try {
+                const u = new URL(url);
+                let videoId = null;
+                let startTime = 0;
 
-        if (selectedValue === 'youtube') {
-            // ── YouTube path ──
-            const ytUrl = youtubeUrlInput.value.trim();
-            if (!ytUrl) {
-                alert('Please paste a YouTube link first.');
-                return;
+                if (u.hostname === 'youtu.be') {
+                    videoId = u.pathname.slice(1).split('/')[0];
+                } else if (u.hostname.includes('youtube.com')) {
+                    if (u.pathname.startsWith('/embed/')) {
+                        videoId = u.pathname.split('/embed/')[1];
+                    } else {
+                        videoId = u.searchParams.get('v');
+                    }
+                }
+
+                // Parse start time (t parameter)
+                const tParam = u.searchParams.get('t');
+                if (tParam) {
+                    startTime = parseInt(tParam, 10) || 0;
+                }
+
+                return videoId ? { videoId, startTime } : null;
+            } catch {
+                return null;
             }
-            const parsed = parseYouTubeUrl(ytUrl);
-            if (!parsed) {
-                alert('Could not parse that YouTube URL. Please check the link.');
-                return;
+        }
+
+        function createOrUpdateYtPlayer(videoId, startTime) {
+            if (ytPlayer) {
+                ytPlayer.destroy();
+                ytPlayer = null;
             }
-            if (!ytReady) {
-                // API still loading – queue the play
-                pendingYtPlay = true;
-                statusLabel.textContent = '⏳ Loading YouTube player...';
-                statusLabel.className = 'status playing';
-                return;
-            }
-
-            // Stop any HTML audio that might be playing
-            music.pause();
-            usingYouTube = true;
-            createOrUpdateYtPlayer(parsed.videoId, parsed.startTime);
-
-        } else {
-            // ── Direct audio path ──
-            usingYouTube = false;
-            // Stop any YouTube that might be playing
-            if (ytPlayer) { try { ytPlayer.stopVideo(); } catch(e){} }
-            document.getElementById('ytPlayerContainer').style.display = 'none';
-
-            // Track Selection Logic (free tracks)
-            const trackOptions = Array.from(trackSelect.options)
-                .map(opt => opt.value)
-                .filter(val => val !== 'random' && val !== 'youtube');
-            let selectedUrl = selectedValue;
-            if (selectedUrl === 'random') {
-                selectedUrl = trackOptions[Math.floor(Math.random() * trackOptions.length)];
-            }
-
-            // If the track changed, update the source
-            if (music.src !== selectedUrl) {
-                music.src = selectedUrl;
-                music.load();
-            }
-
-            music.volume = 0.6;
-            music.play().catch(error => {
-                alert('Please click the button again to allow audio playback.');
+            // Show the player container (must be visible for iOS Safari)
+            document.getElementById('ytPlayerContainer').style.display = 'block';
+            ytPlayer = new YT.Player('ytPlayerContainer', {
+                height: '158',
+                width: '280',
+                videoId: videoId,
+                playerVars: {
+                    autoplay: 0,           // Don't autoplay; we call playVideo() on ready
+                    start: startTime,
+                    loop: 1,
+                    playlist: videoId,     // Required for loop to work
+                    playsinline: 1,        // Critical for iOS Safari
+                    controls: 1,           // iOS may block without controls
+                    disablekb: 1,
+                    modestbranding: 1,
+                    rel: 0,
+                    iv_load_policy: 3,     // Hide annotations
+                    fs: 0
+                },
+                events: {
+                    onReady: (event) => {
+                        event.target.setVolume(100);
+                        event.target.playVideo();
+                    },
+                    onError: (event) => {
+                        console.error('YouTube Player Error:', event.data);
+                        statusLabel.textContent = '⚠️ YouTube error – try another link';
+                        statusLabel.className = 'status stopped';
+                        actionBtn.textContent = 'TRY AGAIN';
+                        actionBtn.style.backgroundColor = '#e67e22';
+                        isPlaying = false;
+                        usingYouTube = false;
+                        setInputsDisabled(false);
+                        clearTimeout(stopTimer);
+                    }
+                }
             });
         }
 
-        // Update UI
-        isPlaying = true;
-        statusLabel.textContent = '🎵 Music Playing... Pass it!';
-        statusLabel.className = 'status playing';
-        actionBtn.textContent = 'MANUAL STOP';
-        actionBtn.style.backgroundColor = '#e67e22';
-        setInputsDisabled(true);
-
-        // Set a random timer between the configured min and max
-        const randomTime = Math.floor(Math.random() * (maxMs - minMs + 1)) + minMs;
-        clearTimeout(stopTimer);
-        stopTimer = setTimeout(() => {
-            stopRound();
-        }, randomTime);
-    }
-
-    function stopRound() {
-        // Pause whichever source is playing
-        if (usingYouTube && ytPlayer) {
-            try { ytPlayer.pauseVideo(); } catch(e) {}
-        } else {
-            music.pause();
+        // ── Core game logic ─────────────────────────────────────
+        function setInputsDisabled(disabled) {
+            minTimeInput.disabled = disabled;
+            maxTimeInput.disabled = disabled;
+            trackSelect.disabled = disabled;
+            youtubeUrlInput.disabled = disabled;
         }
-        clearTimeout(stopTimer);
-        isPlaying = false;
 
-        // Update UI to require manual restart
-        statusLabel.textContent = '🛑 STOP! Unwrapping time!';
-        statusLabel.className = 'status stopped';
-        actionBtn.textContent = 'RESUME NEXT ROUND';
-        actionBtn.style.backgroundColor = '#2ecc71';
-        setInputsDisabled(false);
-    }
-</script>
+        function getTimeBounds() {
+            let minSec = parseInt(minTimeInput.value, 10) || 10;
+            let maxSec = parseInt(maxTimeInput.value, 10) || 25;
+
+            // Clamp to sensible values
+            minSec = Math.max(1, minSec);
+            maxSec = Math.max(minSec + 1, maxSec);
+
+            // Write clamped values back so the user sees the correction
+            minTimeInput.value = minSec;
+            maxTimeInput.value = maxSec;
+
+            return { minMs: minSec * 1000, maxMs: maxSec * 1000 };
+        }
+
+        function toggleGame() {
+            if (isPlaying) {
+                stopRound();
+            } else {
+                startRound();
+            }
+        }
+
+        function startRound() {
+            const { minMs, maxMs } = getTimeBounds();
+            const selectedValue = trackSelect.value;
+
+            if (selectedValue === 'youtube') {
+                // ── YouTube path ──
+                const ytUrl = youtubeUrlInput.value.trim();
+                if (!ytUrl) {
+                    alert('Please paste a YouTube link first.');
+                    return;
+                }
+                const parsed = parseYouTubeUrl(ytUrl);
+                if (!parsed) {
+                    alert('Could not parse that YouTube URL. Please check the link.');
+                    return;
+                }
+                if (!ytReady) {
+                    // API still loading – queue the play
+                    pendingYtPlay = true;
+                    statusLabel.textContent = '⏳ Loading YouTube player...';
+                    statusLabel.className = 'status playing';
+                    return;
+                }
+
+                // Stop any HTML audio that might be playing
+                music.pause();
+                usingYouTube = true;
+                createOrUpdateYtPlayer(parsed.videoId, parsed.startTime);
+
+            } else {
+                // ── Direct audio path ──
+                usingYouTube = false;
+                // Stop any YouTube that might be playing
+                if (ytPlayer) { try { ytPlayer.stopVideo(); } catch (e) { } }
+                document.getElementById('ytPlayerContainer').style.display = 'none';
+
+                // Track Selection Logic (free tracks)
+                const trackOptions = Array.from(trackSelect.options)
+                    .map(opt => opt.value)
+                    .filter(val => val !== 'random' && val !== 'youtube');
+                let selectedUrl = selectedValue;
+                if (selectedUrl === 'random') {
+                    selectedUrl = trackOptions[Math.floor(Math.random() * trackOptions.length)];
+                }
+
+                // If the track changed, update the source
+                if (music.src !== selectedUrl) {
+                    music.src = selectedUrl;
+                    music.load();
+                }
+
+                music.volume = 0.6;
+                music.play().catch(error => {
+                    alert('Please click the button again to allow audio playback.');
+                });
+            }
+
+            // Update UI
+            isPlaying = true;
+            statusLabel.textContent = '🎵 Music Playing... Pass it!';
+            statusLabel.className = 'status playing';
+            actionBtn.textContent = 'MANUAL STOP';
+            actionBtn.style.backgroundColor = '#e67e22';
+            setInputsDisabled(true);
+
+            // Set a random timer between the configured min and max
+            const randomTime = Math.floor(Math.random() * (maxMs - minMs + 1)) + minMs;
+            clearTimeout(stopTimer);
+            stopTimer = setTimeout(() => {
+                stopRound();
+            }, randomTime);
+        }
+
+        function stopRound() {
+            // Pause whichever source is playing
+            if (usingYouTube && ytPlayer) {
+                try { ytPlayer.pauseVideo(); } catch (e) { }
+            } else {
+                music.pause();
+            }
+            clearTimeout(stopTimer);
+            isPlaying = false;
+
+            // Update UI to require manual restart
+            statusLabel.textContent = '🛑 STOP! Unwrapping time!';
+            statusLabel.className = 'status stopped';
+            actionBtn.textContent = 'RESUME NEXT ROUND';
+            actionBtn.style.backgroundColor = '#2ecc71';
+            setInputsDisabled(false);
+        }
+    </script>
 
 </body>
+
 </html>
